@@ -1,0 +1,30 @@
+.dashboard__header{
+    width: 100%;
+    background-color: #1F3A60;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    align-items: center;
+    padding: 12px 24px;
+    .dashboard__user{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        .dashboard__avatar{
+            width: 40px;
+            height: 40px;
+ 
+        }
+        .dashboard__avatar-image{
+            width: 100%;
+           border-radius: 100%;
+        }
+    }
+}
+
+.dashboard__layout{
+    display: flex;
+}
+

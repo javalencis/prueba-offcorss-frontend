@@ -1,12 +1,13 @@
 import { useState } from 'react'
-
+import { Dashboard } from './pages/Dashboard'
+import './styles/global.scss'
 
 function App() {
 
 
   return (
     <>
-      Mi App
+      <Dashboard />
     </>
   )
 }
