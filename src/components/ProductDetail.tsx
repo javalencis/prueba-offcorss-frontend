@@ -20,7 +20,7 @@ export const ProductDetail = () => {
     };
     getProduct();
   }, []);
-  console.log(product);
+
   return (
     <div className="productdetails">
       <div className="productdetails__images">

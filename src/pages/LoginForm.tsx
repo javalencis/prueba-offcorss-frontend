@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 
-import '../styles/loginform.scss'
+import "../styles/loginform.scss";
+import { useLogin } from "../hooks/useLogin";
 interface LoginFormInputs {
   email: string;
   password: string;
@@ -13,17 +14,26 @@ export const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInputs>();
-  const navigate = useNavigate()
-  const onSubmit = (data: LoginFormInputs) => {
-    console.log("Intento de login:", data);
-    navigate('/admin')
-    // Aquí iría tu lógica para autenticación
+  const navigate = useNavigate();
+  const { loginUser } = useLogin();
+
+  const onSubmit = async (data: LoginFormInputs) => {
+    try {
+      const { user } = await loginUser(data.email, data.password);
+      console.log("Usuario autenticado:", user);
+      navigate("/admin");
+    } catch (error: any) {
+      alert(error.message); 
+    }
   };
-  
 
   return (
     <section className="loginform__container">
-      <form onSubmit={handleSubmit(onSubmit)} className="loginform__form" noValidate>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="loginform__form"
+        noValidate
+      >
         <h2>Iniciar Sesión</h2>
         <div className="loginform__field">
           <label htmlFor="email">Correo electrónico</label>
@@ -61,7 +71,9 @@ export const LoginForm = () => {
           </p>
         </div>
 
-        <button type="submit" className="loginform__button">Iniciar sesión</button>
+        <button type="submit" className="loginform__button">
+          Iniciar sesión
+        </button>
       </form>
     </section>
   );

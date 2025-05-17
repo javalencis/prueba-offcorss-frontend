@@ -1,27 +1,36 @@
-import { useState } from "react";
+import { type JSX } from "react";
 import { Dashboard } from "./pages/Dashboard";
 import "./styles/global.scss";
 import { RegisterForm } from "./pages/RegisterForm";
 import { LoginForm } from "./pages/LoginForm";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+
+function ProtectedRoute({ children }: { children: JSX.Element }) {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" />;
+}
 
 function App() {
-  const isAuthenticated = false;
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
 
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/register" element={<RegisterForm />} />
-
-        {/* Ruta protegida */}
-        <Route
-          path="/admin/*"
-          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
-        />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
