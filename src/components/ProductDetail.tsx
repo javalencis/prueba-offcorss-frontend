@@ -10,7 +10,7 @@ export const ProductDetail = () => {
     const getProduct = async () => {
       try {
         const res = await fetch(
-          `/api-vtex/api/catalog_system/pub/products/search?fq=productId:${productId}`
+          `http://localhost:3000/api/products/${productId}`
         );
         const data: Product[] = await res.json();
         setProduct(data[0]);
