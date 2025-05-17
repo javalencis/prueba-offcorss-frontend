@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 
 import "../styles/loginform.scss";
 import { useLogin } from "../hooks/useLogin";
+import { useState } from "react";
 interface LoginFormInputs {
   email: string;
   password: string;
@@ -16,14 +17,16 @@ export const LoginForm = () => {
   } = useForm<LoginFormInputs>();
   const navigate = useNavigate();
   const { loginUser } = useLogin();
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   const onSubmit = async (data: LoginFormInputs) => {
+    setLoginError(null);
     try {
       const { user } = await loginUser(data.email, data.password);
       console.log("Usuario autenticado:", user);
       navigate("/admin");
     } catch (error: any) {
-      alert(error.message); 
+      setLoginError(error.message || "Error al iniciar sesión. Inténtalo de nuevo.");
     }
   };
 
@@ -35,6 +38,7 @@ export const LoginForm = () => {
         noValidate
       >
         <h2>Iniciar Sesión</h2>
+         {loginError && <p className="loginform__error-message">{loginError}</p>}
         <div className="loginform__field">
           <label htmlFor="email">Correo electrónico</label>
           <input
@@ -48,7 +52,7 @@ export const LoginForm = () => {
               },
             })}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <p className="loginform__error">{errors.email.message}</p>}
         </div>
 
         {/* Contraseña */}
@@ -61,10 +65,10 @@ export const LoginForm = () => {
               required: "La contraseña es obligatoria",
             })}
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && <p className="loginform__error">{errors.password.message}</p>}
         </div>
 
-        {/* Link para registrarse */}
+
         <div className="loginform__link">
           <p>
             ¿No tienes cuenta? <Link to="/register">Regístrate</Link>

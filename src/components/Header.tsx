@@ -1,7 +1,13 @@
 import { useAuth } from "../context/AuthContext";
-
+import iconBack from "../assets/salida.png";
+import { useNavigate } from "react-router";
 export const Header = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
   return (
     <header className="dashboard__header">
       <h1 className="dashboard__title">Dashboard</h1>
@@ -15,6 +21,13 @@ export const Header = () => {
             alt={user?.firstName}
             className="dashboard__avatar-image"
           />
+        </div>
+        <div
+          className="dashboard__logout"
+          title="Cerrar Sesión"
+          onClick={handleLogout}
+        >
+          <img src={iconBack} alt="logout" />
         </div>
       </div>
     </header>
