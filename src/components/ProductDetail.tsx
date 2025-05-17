@@ -1,31 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Swiper, SwiperSlide } from 'swiper/react';
 
-import 'swiper/css'
 import "../styles/productdetail.scss";
-interface Product {
-  productId: string;
-  productTitle: string;
-  brand: string;
-  description: string;
-  Color: string[];
-  items: {
-    itemId: string;
-    "Codigo de color": string[];
-    Talla: string[];
-    images: {
-      imageUrl: string;
-      imageText: string;
-    }[];
-    sellers: {
-      commertialOffer: {
-        Price: number;
-        PriceWithoutDiscount: number;
-      };
-    }[];
-  }[];
-}
+import type { Product } from "../interfaces/Product";
 export const ProductDetail = () => {
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product>();
@@ -73,7 +50,6 @@ export const ProductDetail = () => {
           >
             
           </div>
-          {}
         </div>
 
         <p className="productdetails__info-description">
