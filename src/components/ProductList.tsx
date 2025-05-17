@@ -45,9 +45,11 @@ export const ProductList = () => {
         setProductsData(data);
 
         const resourcesHeader = res.headers.get("resources");
+        console.log(res.headers.get);
         if (resourcesHeader) {
           const match = resourcesHeader.match(/\d+-\d+\/(\d+)/);
           if (match && match[1]) {
+            
             setTotalItemsFromAPI(parseInt(match[1], 10));
           } else if (data.length < ITEMS_PER_PAGE && !currentSearchTerm) {
 
