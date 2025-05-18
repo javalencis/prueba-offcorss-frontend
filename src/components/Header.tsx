@@ -1,6 +1,7 @@
 import { useAuth } from "../context/AuthContext";
 import iconBack from "../assets/salida.png";
 import { useNavigate } from "react-router";
+import imgUser from '../assets/fotouser.jpg'
 export const Header = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export const Header = () => {
         </p>
         <div className="dashboard__avatar">
           <img
-            src="https://avatars.githubusercontent.com/u/12345678?v=4"
+            src={imgUser}
             alt={user?.firstName}
             className="dashboard__avatar-image"
           />
