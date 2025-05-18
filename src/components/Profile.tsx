@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
-import "../styles/profile.scss"; // Asegúrate que la ruta es correcta
+import "../styles/profile.scss";
 import { useMutation } from "@apollo/client";
 import { UPDATE_USER } from "../clients/query";
 
@@ -76,7 +76,7 @@ export const Profile = () => {
       });
 
       if (updatedData) {
-        login(token!, updatedData.updateUser); 
+        login(token!, updatedData.updateUser);
         console.log(
           "Usuario actualizado correctamente:",
           updatedData.updateUser
@@ -88,7 +88,7 @@ export const Profile = () => {
   };
 
   return (
-    <section>
+    <section className="dashboard__profile-container">
       <div className="dashboard__profile">
         <h3>Perfil</h3>
         <form
@@ -114,15 +114,15 @@ export const Profile = () => {
             <input
               value={
                 user?.createdAt
-                  ? new Date(user.createdAt).toLocaleDateString()
+                  ? new Date(Number(user.createdAt)).toLocaleDateString() // Convertir a número
                   : "No disponible"
               }
               disabled
               className="dashboard__profile-field-value"
             />
+    
           </div>
 
-          {/* Nombre */}
           <div className="dashboard__profile-details-field">
             <p className="dashboard__profile-field-header">Nombre</p>
             <input

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../styles/search.scss'
 interface SearchInputProps {
   onSearch: (searchTerm: string) => void;
   placeholder?: string;
@@ -26,8 +27,7 @@ export const Search = ({
 
     <form
       onSubmit={handleSubmit}
-      className="search-input-form"
-      style={{ marginBottom: "20px" }}
+      className="search__form"
     >
       <input
         type="text"
@@ -36,13 +36,7 @@ export const Search = ({
         placeholder={placeholder}
         aria-label="Buscar productos"
 
-        style={{
-          padding: "10px",
-          border: "1px solid #ccc",
-          borderRadius: "4px",
-          width: "100%",
-          boxSizing: "border-box",
-        }}
+        className="search__input"
       />
 
     </form>
