@@ -11,7 +11,7 @@ export const ProductDetail = () => {
     const getProduct = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/products/${productId}`
+          `https://prueba-offcorss-backend-production.up.railway.app/api/products/${productId}`
         );
         const data: Product[] = await res.json();
         setProduct(data[0]);
@@ -22,7 +22,7 @@ export const ProductDetail = () => {
     getProduct();
   }, []);
   const handleGoBack = () => {
-    navigate(-1); // Navega a la página anterior
+    navigate(-1); 
   };
 
   return (

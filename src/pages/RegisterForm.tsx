@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import "../styles/registerform.scss";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { REGISTER_USER } from "../clients/query";
 import { useNavigate } from "react-router";
 type FormData = {

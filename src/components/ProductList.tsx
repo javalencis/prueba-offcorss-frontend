@@ -29,7 +29,7 @@ export const ProductList = () => {
       setError(null);
       const from = (page - 1) * ITEMS_PER_PAGE;
       const to = from + ITEMS_PER_PAGE - 1;
-      let apiUrl = `http://localhost:3000/api/products?_from=${from}&_to=${to}`;
+      let apiUrl = `https://prueba-offcorss-backend-production.up.railway.app/api/products?_from=${from}&_to=${to}`;
 
       if (currentSearchTerm) {
         apiUrl += `&ft=${encodeURIComponent(currentSearchTerm)}`;
